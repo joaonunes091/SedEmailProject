@@ -10,7 +10,7 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-    User.findById(id).then(user => {
+    User.findById(id).then((user) => {
         done(null, user);
     });
 });
@@ -21,7 +21,7 @@ passport.use(
             clientID: keys.googleClientID,
             clientSecret: keys.googleClientSecret,
             callbackURL: '/auth/google/callback',
-            proxy: true
+            proxy: true,
         },
         (accessToken, refreshToken, profile, done) => {
             User.findOne({ googleId: profile.id }).then(existingUser => {
@@ -32,7 +32,7 @@ passport.use(
                     // we don't have a user record with this ID, make a new record!
                     new User({ googleId: profile.id })
                         .save()
-                        .then(user => done(null, user));
+                        .then((user) => done(null, user));
                 }
             });
         }
