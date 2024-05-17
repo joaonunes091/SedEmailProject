@@ -9,10 +9,11 @@ import App from './components/App';
 import reducers from './reducers';
 
 const store = createStore(reducers, {}, applyMiddleware(thunk));
+const el = document.getElementById('root');
+const root = ReactDOM.createRoot(el);
 
-ReactDOM.render(
+root.render(
     <Provider store={store}>
         <App />
-    </Provider>,
-    document.querySelector('#root')
+    </Provider>
 );
